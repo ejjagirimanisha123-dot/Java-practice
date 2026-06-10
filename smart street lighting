@@ -1,0 +1,35 @@
+
+public class SmartStreetLightSystem {
+
+    private boolean isLightOn;
+    private int brightnessLevel; // 0 to 100
+
+    public SmartStreetLightSystem() {
+        this.isLightOn = false;
+        this.brightnessLevel = 0;
+    }
+
+    
+    public void updateLighting(int ambientLight, boolean motionDetected) {
+        if (ambientLight < 30) {
+            this.isLightOn = true;
+            // Increase brightness if motion is detected, otherwise dim it to save energy
+            this.brightnessLevel = motionDetected ? 100 : 30;
+            System.out.println("Lights ON. Brightness: " + brightnessLevel + "%");
+        } else {
+            this.isLightOn = false;
+            this.brightnessLevel = 0;
+            System.out.println("Lights OFF (Daytime).");
+        }
+    }
+
+    public static void main(String[] args) {
+        SmartStreetLightSystem streetLight = new SmartStreetLightSystem();
+        
+        // Simulation
+        System.out.println("--- Starting Simulation ---");
+        streetLight.updateLighting(10, true);  
+        streetLight.updateLighting(10, false);
+        streetLight.updateLighting(80, false); 
+    }
+}
